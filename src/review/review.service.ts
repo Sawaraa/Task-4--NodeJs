@@ -69,12 +69,11 @@ export class ReviewService {
 
     const counts: Record<string, number> = {};
 
-    // Ініціалізуємо всі ID нулями (щоб ті, для яких немає рецензій, теж були в результаті)
     bookIds.forEach((id) => {
       counts[id.toString()] = 0;
     });
 
-    // Заповнюємо реальними даними з бази
+
     stats.forEach((item) => {
       counts[item._id.toString()] = item.total;
     });
