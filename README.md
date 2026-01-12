@@ -119,3 +119,39 @@ The **Review** entity represents user feedback for specific books. Each review i
 | `date` | `Date` | Timestamp of when the review was created |
 
 ---
+
+## 🚀 API Endpoints & Examples
+
+### 1. Create a Review
+Validates book existence via Spring Boot API before saving.
+- **POST** `/api/review`
+```json
+{
+  "bookId": 5,
+  "authorName": "Alexander Dumas",
+  "rating": 5,
+  "comment": "An absolute classic! Highly recommend."
+}
+```
+### 2. Get Reviews for a Book
+Fetches reviews sorted by date (newest first) with pagination.
+- **GET** `/api/review?bookId=5&size=10&from=0`
+- **Query Parameters:**
+  - `bookId` (required) — Unique identifier of the book.
+  - `size` (optional) — Maximum number of items to return (Default: **10**).
+  - `from` (optional) — Number of items to skip for pagination (Default: **0**).
+
+----
+
+### 3. Get Batch Review Counts
+Calculates the total number of reviews for multiple books in a single request using the **MongoDB Aggregation Pipeline**.
+
+- **Method:** `POST`
+- **Path:** `/api/review/_counts`
+- **Request Body:**
+```json
+{
+  "bookIds": [1, 5, 12, 42]
+}
+```
+
